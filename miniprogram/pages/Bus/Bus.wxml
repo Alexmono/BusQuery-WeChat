@@ -1,0 +1,44 @@
+<view>
+  <!-- Title -->
+  <view class="city">
+    <view class="city-view">
+      <image class="city_image" src="https://s2.ax1x.com/2019/10/14/KpNy1U.png" mode="aspectFit"></image>
+      <text class="city_text">当前城市：</text>
+      <navigator bindtap="changePage" class="city_name">{{city.cityName}}</navigator>
+    </view>
+  </view>
+  <!-- 搜索框 -->
+  <view class="search">
+    <view class="search-view">
+      <view class="search-view-input-view">
+        <input class="search-view-input" type="text" placeholder="{{placeholder}}" bindinput="setValue"></input>
+      </view>
+      <view class="search-view-navigator-view">
+        <button class="search-view-navigator" bindtap="search">
+          <icon class="search-view-navigator-icon" type="search" size="20" color="#09bb07"></icon>
+        </button>
+      </view>
+    </view>
+  </view>
+  <!-- 搜索结果 -->
+  <view hidden="{{!isShowBus}}">
+    <view>
+      <scroll-view hidden="{{isShowBusORStation !== 1}}">
+        <view>
+          <view>{{lineList.transitno}}</view>
+          <view>{{lineList.timetable}}</view>
+          <view wx:for="{{lineList.list}}" wx:key="{{index}}">{{item.station}}</view>
+        </view>
+      </scroll-view>
+      <scroll-view hidden="{{isShowBusORStation !== 2}}">
+        <view wx:for="{{busList}}" wx:key="{{index}}">
+          <navigator>{{busList.busNumber}}</navigator>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+  <!-- 广告 -->
+  <view>
+    <view></view>
+  </view>
+</view>

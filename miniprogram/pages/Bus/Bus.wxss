@@ -1,0 +1,59 @@
+/* pages/Bus/Bus.wxss */
+/* 城市名 */
+.city{
+  display: flex;
+  padding-left: 40rpx;
+}
+.city-view{
+  display: flex;
+  flex: 2;
+}
+.city_image{
+  width: 32rpx;
+  height: 32rpx;
+  margin-top: 11rpx;
+}
+.city_text{
+  font-size: 35rpx;
+}
+.city_name{
+  font-size: 35rpx;
+  color: #576b95;
+}
+/* 搜索框 */
+.search{
+  align-items: center;
+  padding: 20rpx;
+  display: flex;
+  }
+.search-view{
+  display: flex;
+  flex: 8;
+  align-items: center;
+  border-radius: 30rpx;
+  background: rgb(230, 230, 230);
+  padding: 10rpx;
+}
+.search-view-input-view{
+  padding: 5rpx;
+  padding-left: 20rpx;
+  flex: 9;
+}
+.search-view-input{
+  font-size: 30rpx;
+}
+.search-view-navigator-view{
+  flex: 1;
+  float: right;
+  align-items: center;
+  display: flex;
+}
+.search-view-navigator{
+  flex: 9;
+  float: right;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  padding: 5rpx;
+  padding-left: 5rpx;
+}

@@ -1,0 +1,61 @@
+<view>
+  <!-- title -->
+  <view class="city">
+    <view class="city-view">
+      <image class="city_image" src="https://s2.ax1x.com/2019/10/14/KpNy1U.png" mode="aspectFit"></image>
+      <text class="city_text">当前城市：</text>
+      <navigator bindtap="changePage" class="city_name">{{city.cityName}}</navigator>
+    </view>
+  </view>
+  <!-- 起点，终点输入 -->
+  <view class="ste-body">
+    <view class="ste-body-view">
+      <!-- 标题 -->
+      <view class="ste-title">
+        <text class="ste-title-text">线路规划</text>
+      </view>
+      <!-- 起点 -->
+      <view class="ste-start">
+        <view class="ste-start-text-position">
+          <text class="ste-start-text">起点</text>
+          <button class="ste-start-position" bindtap="position">获取定位</button>
+        </view>
+        <input class="ste-start-input" bindinput="getStart" bindblur="startLoseFoucs" value="{{start.value}}"></input>
+        <!-- 输入提示 -->
+        <scroll-view hidden="{{!isShowSSuggestion}}">
+          <view class="start-suggestion suggestion" wx:for="{{startSuggestion}}" wx:key="{{index}}">
+            <view bindtap="suggestionStartAddr" id="{{index}}">{{item.title}}</view>
+            <view>{{item.addr}}</view>
+          </view>
+        </scroll-view>
+      </view>
+      <!-- 起点终点交换 -->
+      <view class="ste-exchange">
+        <button class="ste-exchange-button" bindtap="exChange">
+          <image class="ste-exchange-icon" src="https://s2.ax1x.com/2019/10/15/KCII8x.png" mode="aspectFit"></image>
+        </button>
+      </view>
+      <!-- 终点 -->
+      <view class="ste-end">
+        <text class="ste-end-text">终点</text>
+        <input class="ste-end-input" bindinput="getEnd" bindblur="endLoseFoucs" value="{{end.value}}"></input>
+        <!-- 输入提示 -->
+        <scroll-view hidden="{{!isShowESuggestion}}">
+          <view class="end-suggestion suggestion" wx:for="{{endSuggestion}}" wx:key="{{index}}">
+            <view bindtap="suggestionEndAddr" id="{{index}}">{{item.title}}</view>
+            <view>{{item.addr}}</view>
+          </view>
+        </scroll-view>
+        <!-- 确认按钮 -->
+        <view class="ste-sure">
+          <button class="ste-sure-button" bindtap="planLine">开始规划</button>
+        </view>
+      </view>
+    </view>
+
+    <!-- 广告 -->
+    <view>
+
+    </view>
+  </view>
+</view>

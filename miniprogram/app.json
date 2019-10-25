@@ -1,0 +1,46 @@
+{
+  "pages": [
+    "pages/Bus/Bus",
+    "pages/Position/Position",
+    "pages/LinePlanning/LinePlanning",
+    "pages/Subways/Subways",
+    "pages/Result/Result"
+    
+    
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarTitleText": "BusQurey",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/Bus/Bus",
+        "text": "公交",
+        "iconPath": "icon/tabBar/Bus/Bus.png",
+        "selectedIconPath": "icon/tabBar/Bus/Bus.png"
+      },
+      {
+        "pagePath": "pages/LinePlanning/LinePlanning",
+        "text": "线路规划",
+        "iconPath": "icon/tabBar/LinePlanning/LinePlanning.png",
+        "selectedIconPath": "icon/tabBar/LinePlanning/LinePlanning.png"
+      },
+      {
+        "pagePath": "pages/Subways/Subways",
+        "text": "地铁",
+        "iconPath": "icon/tabBar/Subway/subway.png",
+        "selectedIconPath": "icon/tabBar/Subway/subway.png"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "小程序正在申请地理位置权限"
+    }
+  },
+  "sitemapLocation": "sitemap.json"
+}

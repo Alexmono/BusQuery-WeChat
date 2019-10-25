@@ -1,0 +1,111 @@
+/* pages/LinePlanning/LinePlanning.wxss */
+/* 城市名 */
+.city{
+  display: flex;
+  padding-left: 40rpx;
+}
+.city-view{
+  display: flex;
+  flex: 2;
+}
+.city_image{
+  width: 32rpx;
+  height: 32rpx;
+  margin-top: 11rpx;
+}
+.city_text{
+  font-size: 35rpx;
+}
+.city_name{
+  font-size: 35rpx;
+  color: #576b95;
+}
+
+/*start to end*/
+.ste-body{
+  display: block;
+  padding: 30rpx;
+  padding-right: 50rpx;
+  padding-left: 50rpx;
+}
+.ste-body-view{
+  display: block;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  background: rgb(235, 235, 235);
+  padding: 20rpx;
+}
+.ste-title{
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.ste-title-text{
+  font-size: 21px;
+}
+.ste-start{
+  margin-left: 20rpx;
+}
+.ste-start-text-position{
+  display: flex;
+}
+.ste-start-text{
+  font-size: 15px;
+  width: 75rpx;
+  height: 50rpx;
+  flex: 1;
+  line-height: 65rpx;
+}
+.ste-start-position{
+  color: blue;
+  font-size: 14px;
+  text-align: left;
+  flex: 2;
+}
+.ste-start-input{
+  border-bottom-color: grey;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  height: 50rpx;
+}
+.ste-start-input:hover{
+  border-bottom-color: #09bb07;
+}
+.ste-exchange{
+  padding-top: 20rpx;
+}
+.ste-exchange-button{
+  background: rgb(235, 235, 235);
+}
+.ste-exchange-icon{
+  width: 48rpx;
+  height: 48rpx;
+}
+.ste-end{
+  margin-left: 24rpx;
+}
+.ste-end-text{
+  font-size: 15px;
+}
+.ste-end-input{
+  border-bottom-color: grey;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  height: 50rpx;
+}
+.ste-end-input:hover{
+  border-bottom-color: #09bb07;
+}
+.ste-sure{
+  padding-top: 30rpx;
+  display: flex;
+}
+.ste-sure-button{
+  background: #10cc0d;
+  font-size: 18px;
+  color: white;
+}
+.ste-sure-button:active{
+  background: #279e25;
+}

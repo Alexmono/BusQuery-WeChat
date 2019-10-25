@@ -1,0 +1,5 @@
+<!-- <input bindblur="top" value="{{topValue}}"></input>
+<button bindtap="click">点击交换</button>
+<input bindblur="bottom" value="{{bottomValue}}"></input> -->
+<map id="myMap" style="width: 100%; height: 300px;" longitude="{{longitude}}" latitude="{{latitude}}" scale='16' polyline="{{polyline}}" show-location>
+</map>
