@@ -323,8 +323,7 @@ Page({
       }
     }
     //将选择对象放入app.js
-    app.setPreviousPage(ccity)
-
+    app.setCity(ccity)
     //跳转回上一页
     var url = this.data.previousPage
     console.log(url)

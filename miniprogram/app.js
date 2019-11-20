@@ -19,9 +19,6 @@ App({
   },
 
   globalData: {
-    amap_key: "5406458d3b826e46c643ed51a9d4132b",
-    qqmap_key: "HEIBZ-Y67KW-JKIRI-O2A45-CO4D6-UTBNX",
-    jisu_key: "746b621c85938173",
     previousPage: '', //上一个页面
     //选择的城市
     city: {
@@ -32,7 +29,7 @@ App({
 
   },
   //设置城市
-  setPreviousPage: function(e) {
+  setCity: function(e) {
     this.globalData.city = e
   }
 

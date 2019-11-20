@@ -7,65 +7,77 @@
       <navigator bindtap="changePage" class="city_name">{{city.cityName}}</navigator>
     </view>
   </view>
-<!-- 顶部navbar导航栏 -->
-<view class="navbar">
-  <view class="navbar-view">
-    <view wx:for="{{navbar}}" data-index="{{index}}"
-      class="navbar-item{{currentIndex==index?'-choose':''}}"
-      bindtap="navbarTab" wx:key="index">
-       <text class="item-text">{{item}}</text>
-    </view>
-  </view>
-</view>
-<!-- content -->
-<view hidden="{{currentIndex!==0}}" class="box">
-  <view class="station-search">
-    <view class="station-search-title">
-      <view class="station-search-title-view">
-        <text class="station-search-title-view-text">地铁站点搜索</text>
-      </view>
-    </view>
-    <view class="station-search-input">
-      <view class="station-seatch-input-befor"></view>
-      <view class="station-search-input-view">
-        <text class="station-search-input-view-text">输入站点</text>
-        <input class="station-search-input-view-input"></input>
-      </view>
-      <view class="station-seatch-input-after"></view>
-    </view>
-    <view class="station-search-button">
-      <view class="station-search-button-view">
-        <button class="station-search-button-view-button">搜索</button>
+  <!-- 顶部navbar导航栏 -->
+  <view class="navbar">
+    <view class="navbar-view">
+      <view wx:for="{{navbar}}" data-index="{{index}}" class="navbar-item{{currentIndex==index?'-choose':''}}" bindtap="navbarTab" wx:key="index">
+        <text class="item-text">{{item}}</text>
       </view>
     </view>
   </view>
-</view>
-<view hidden="{{currentIndex!==1}}" class="box">
-  <view class="line-way">
-  <!-- 线路搜索 -->
-    <view class="line-search">
-      <view class="search">
-        <view class="search-view">
-          <view class="search-view-input-view">
-            <input class="search-view-input" type="text"></input>
+  <!-- content -->
+  <view hidden="{{currentIndex!==0}}" class="box">
+    <view class="station-search">
+      <view class="station-search-title">
+        <view class="station-search-title-view">
+          <text class="station-search-title-view-text">地铁站点搜索</text>
+        </view>
+      </view>
+      <view class="station-search-input">
+        <view class="station-seatch-input-befor"></view>
+        <view class="station-search-input-view">
+          <text class="station-search-input-view-text">输入站点</text>
+          <input class="station-search-input-view-input" bindinput="setSubwayStation"></input>
+        </view>
+        <scroll-view hidden="{{!isShowStationSuggestion}}">
+        <view class="stationSuggestion" wx:for="{{stationSuggestion}}" wx:key="index">
+          <view bindtap="suggestionAddr" id="{{index}}" data-id="{{item.id}}">{{item.title}}</view>
+          <view>{{item.addr}}</view>
+        </view>
+      </scroll-view>
+        <view class="station-seatch-input-after"></view>
+      </view>
+      <view class="station-search-button">
+        <view class="station-search-button-view">
+          <button class="station-search-button-view-button" bindtap="searchSubwayStation">搜索</button>
+        </view>
+      </view>
+    </view>
+    <!-- 站点地铁列表结果集展示 -->
+    <view>
+      <view wx:for='{{stationLineList}}' wx:key='{{index}}'>
+        <view>{{transitno}}</view>
+        <view>{{startstation}}--{{endstation}}</view>
+        <view>{{starttime}}--{{endtime}}</view>
+      </view>
+    </view>
+  </view>
+  <view hidden="{{currentIndex!==1}}" class="box">
+    <view class="line-way">
+      <!-- 线路搜索 -->
+      <view class="line-search">
+        <view class="search">
+          <view class="search-view">
+            <view class="search-view-input-view">
+              <input class="search-view-input" type="text"></input>
+            </view>
+            <view class="search-view-navigator-view">
+              <button class="search-view-navigator">
+                <icon class="search-view-navigator-icon" type="search" size="20" color="#09bb07"></icon>
+              </button>
+            </view>
           </view>
-        <view class="search-view-navigator-view">
-          <button class="search-view-navigator">
-            <icon class="search-view-navigator-icon" type="search" size="20" color="#09bb07"></icon>
-          </button> 
+        </view>
+      </view>
+      <!-- 线路展示 -->
+      <view class="line-display">
+        <view class="line" wx:for="{{subwayList}}" wx:key="index">
+          <text class="lineName">{{item.lineName}}</text>
+          <view class="lineColor" style="background:{{item.lineColor}}"></view>
         </view>
       </view>
     </view>
   </view>
-  <!-- 线路展示 -->
-  <view class="line-display">
-    <view class="line" wx:for="{{subwayList}}" wx:key="{{index}}">
-      <text class="lineName">{{item.lineName}}</text>
-      <view class="lineColor" style="background:{{item.lineColor}}"></view>
-    </view>
-  </view>
-  </view>
-</view>
 
   <!-- 广告 -->
   <view></view>

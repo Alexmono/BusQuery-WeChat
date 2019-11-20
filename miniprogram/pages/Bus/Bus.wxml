@@ -7,12 +7,14 @@
       <navigator bindtap="changePage" class="city_name">{{city.cityName}}</navigator>
     </view>
   </view>
-  <!-- 搜索框 -->
+  <!-- 搜索 -->
   <view class="search">
     <view class="search-view">
+      <!-- 搜索框 -->
       <view class="search-view-input-view">
-        <input class="search-view-input" type="text" placeholder="{{placeholder}}" bindinput="setValue"></input>
-      </view>
+        <input class="search-view-input" type="text" placeholder="{{placeholder}}" value="{{inputContent}}" bindinput="getSuggerstion" bindblur="setValue"></input>
+      </view>  
+      <!-- 搜索按钮 -->
       <view class="search-view-navigator-view">
         <button class="search-view-navigator" bindtap="search">
           <icon class="search-view-navigator-icon" type="search" size="20" color="#09bb07"></icon>
@@ -20,19 +22,32 @@
       </view>
     </view>
   </view>
+  <!-- 输入提示 -->
+      <scroll-view hidden="{{!isShowBusSuggestion}}">
+        <view class="busSuggestion" wx:for="{{busSuggestion}}" wx:key="index">
+          <view bindtap="suggestionAddr" id="{{index}}" data-id="{{item.id}}">{{item.title}}</view>
+          <view>{{item.addr}}</view>
+        </view>
+      </scroll-view>
   <!-- 搜索结果 -->
   <view hidden="{{!isShowBus}}">
     <view>
       <scroll-view hidden="{{isShowBusORStation !== 1}}">
         <view>
-          <view>{{lineList.transitno}}</view>
-          <view>{{lineList.timetable}}</view>
-          <view wx:for="{{lineList.list}}" wx:key="{{index}}">{{item.station}}</view>
+          <view>{{stationList.transitno}}</view>
+          <view>{{stationList.timetable}}</view>
+          <view wx:for="{{stationList.list}}" wx:key='index' data-stationId="{{index}}">
+            <button class="busStation-{{type}}"></button>
+            <view>{{item.station}}</view>
+          </view>
         </view>
       </scroll-view>
       <scroll-view hidden="{{isShowBusORStation !== 2}}">
-        <view wx:for="{{busList}}" wx:key="{{index}}">
-          <navigator>{{busList.busNumber}}</navigator>
+        <view wx:for="{{busList}}" wx:key="index">
+          <view>{{item.transitno}}</view>
+          <view>票价：{{item.price}}</view>
+          <view>发车时间：{{item.starttime}}</view>
+          <view>收车时间：{{item.endtime}}</view>
         </view>
       </scroll-view>
     </view>

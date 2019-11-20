@@ -146,8 +146,8 @@ Page({
     var that = this
     var limit = ''
     //判断是否选择了城市
-    if (that.data.city.cityId != '000000') {
-      limit = that.data.city.cityName
+    if (this.data.city.cityName != '未选择') {
+      limit = this.data.city.cityName
     }
     //输入框是否为空判断
     if (value.length == 0) {
@@ -179,7 +179,6 @@ Page({
   },
   //失去焦点
   startLoseFoucs: function(event) {
-    var select = {}
     //根据输入的进行查询
     this.setData({
       isShowSSuggestion: false,
@@ -217,9 +216,9 @@ Page({
     var value = event.detail.value
     var that = this
     var limit = ''
-    //判断是否选择城市
-    if (that.data.city.cityId != '000000') {
-      limit = that.data.city.cityName
+    //判断是否选择了城市
+    if (this.data.city.cityName != '未选择') {
+      limit = this.data.city.cityName
     }
     //判断输入框是否为空
     if (value.length == 0) {
