@@ -1,6 +1,5 @@
 {
 	"miniprogramRoot": "miniprogram/",
-	"cloudfunctionRoot": "cloudfunctions/",
 	"setting": {
 		"urlCheck": false,
 		"es6": true,
@@ -22,7 +21,7 @@
 	},
 	"appid": "wxabd45b006d5d9db9",
 	"projectname": "BusQuery",
-	"libVersion": "2.8.3",
+	"libVersion": "2.0.4",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"condition": {

@@ -21,9 +21,7 @@ Page({
     //内容
     start: {},
     end: {},
-    //线路
-    latitude: '',
-    longitude: '',
+    //线路(每一项为一个方案)
     polyline: []
   },
 
@@ -47,10 +45,6 @@ Page({
   onReady: function() {
 
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function() {
     this.getCity();
   },
@@ -107,9 +101,9 @@ Page({
       success: function(res) {
         var lat = res.latitude
         var lnt = res.longitude
-        var location = {}
-        location.lat = lat
-        location.lnt = lnt
+        // var location = {}
+        // location.lat = lat
+        // location.lnt = lnt
         qqmapsdk.reverseGeocoder({
           location: {
             latitude: lat,
@@ -118,7 +112,7 @@ Page({
           success: function(res) {
             var start = {}
             start.value = res.result.formatted_addresses.recommend
-            start.location = location
+            start.location = res.result.location
             that.setData({
               start: start
             })
@@ -146,8 +140,8 @@ Page({
     var that = this
     var limit = ''
     //判断是否选择了城市
-    if (this.data.city.cityName != '未选择') {
-      limit = this.data.city.cityName
+    if (this.data.city.name != '未选择') {
+      limit = this.data.city.name
     }
     //输入框是否为空判断
     if (value.length == 0) {
@@ -155,18 +149,23 @@ Page({
         isShowSSuggestion: false
       })
     } else {
-      this.setData({
-        isShowSSuggestion: true
-      })
       //输入提示
       qqmapsdk.getSuggestion({
         keyword: value,
         region: limit,
         page_size: 20,
         success: function(res) {
-          that.setData({
-            startSuggestion: res.data
-          })
+          var list = res.data
+          if (list.length == 0) {
+            that.setData({
+              isShowSSuggestion: false
+            })
+          } else {
+            that.setData({
+              isShowSSuggestion: true,
+              startSuggestion: list
+            })
+          }
         },
         fail: function(error) {
           console.error(error);
@@ -178,26 +177,36 @@ Page({
     }
   },
   //失去焦点
-  startLoseFoucs: function(event) {
-    //根据输入的进行查询
+  loseblur: function() {
     this.setData({
       isShowSSuggestion: false,
+      isShowESuggestion: false
+    })
+  },
+  getSscroll: function() {
+    this.setData({
+      isShowSSuggestion: true,
+      isShowESuggestion: false
+    })
+  },
+  getEscroll: function() {
+    this.setData({
+      isShowSSuggestion: false,
+      isShowESuggestion: this
     })
   },
 
   //起点提示选择
   suggestionStartAddr: function(e) {
-    var id = e.currentTarget.id;
+    var item = e.currentTarget.dataset.sitem;
     var selectStart = {}
-    for (var i = 0; i < this.data.startSuggestion.length; i++) {
-      if (i == id) {
-        selectStart.value = this.data.startSuggestion[i].title
-        selectStart.location = this.data.startSuggestion[i].location
-        this.setData({
-          start: selectStart
-        })
-      }
-    }
+    selectStart.value = item.title
+    selectStart.location = item.location
+    this.setData({
+      start: selectStart,
+      isShowSSuggestion: false,
+      isShowESuggestion: false
+    })
   },
 
   //交换起点终点
@@ -217,8 +226,8 @@ Page({
     var that = this
     var limit = ''
     //判断是否选择了城市
-    if (this.data.city.cityName != '未选择') {
-      limit = this.data.city.cityName
+    if (this.data.city.name != '未选择') {
+      limit = this.data.city.name
     }
     //判断输入框是否为空
     if (value.length == 0) {
@@ -226,18 +235,24 @@ Page({
         isShowESuggestion: false
       })
     } else {
-      this.setData({
-        isShowESuggestion: true
-      })
       //输入提示
       qqmapsdk.getSuggestion({
         keyword: value,
         region: limit,
         page_size: 20,
         success: function(res) {
-          that.setData({
-            endSuggestion: res.data
-          })
+          var list = res.data
+          if (list.length == 0) {
+            that.setData({
+              isShowESuggestion: false
+            })
+          } else {
+            that.setData({
+              isShowESuggestion: true,
+              endSuggestion: list
+            })
+          }
+
         },
         fail: function(error) {
           console.error(error);
@@ -249,92 +264,28 @@ Page({
     }
   },
 
-  //失去焦点
-  endLoseFoucs: function(event) {
-    //根据输入的查询
-    this.setData({
-      isShowESuggestion: false,
-    })
-  },
-
   //终点提示选择
   suggestionEndAddr: function(e) {
-    var id = e.currentTarget.id;
+    var item = e.currentTarget.dataset.eitem;
     var selectEnd = {}
-    for (var i = 0; i < this.data.endSuggestion.length; i++) {
-      if (i == id) {
-        selectEnd.value = this.data.endSuggestion[i].title
-        selectEnd.location = this.data.endSuggestion[i].location
-        this.setData({
-          end: selectEnd
-        })
-      }
-    }
+    selectEnd.value = item.title
+    selectEnd.location = item.location
+    this.setData({
+      end: selectEnd,
+      isShowSSuggestion: false,
+      isShowESuggestion: false
+    })
+
   },
 
   //开始规划
   planLine: function() {
-    var that = this
-    qqmapsdk.direction({
-      mode: 'transit',
-      from: {
-        latitude: that.data.start.location.lat,
-        longitude: that.data.start.location.lng
-      },
-      to: {
-        latitude: that.data.end.location.lat,
-        longitude: that.data.end.location.lng
-      },
-      success: function(res) {
-        var ret = res.result.routes[0];
-        var count = ret.steps.length;
-        var pl = [];
-        var coors = [];
-        //获取各个步骤的polyline
-        for (var i = 0; i < count; i++) {
-          if (ret.steps[i].mode == 'WALKING' && ret.steps[i].polyline) {
-            coors.push(ret.steps[i].polyline);
-          }
-          if (ret.steps[i].mode == 'TRANSIT' && ret.steps[i].lines[0].polyline) {
-            coors.push(ret.steps[i].lines[0].polyline);
-          }
-        }
-        //坐标解压（返回的点串坐标，通过前向差分进行压缩）
-        var kr = 1000000;
-        for (var i = 0; i < coors.length; i++) {
-          for (var j = 2; j < coors[i].length; j++) {
-            coors[i][j] = Number(coors[i][j - 2]) + Number(coors[i][j]) / kr;
-          }
-        }
-        //定义新数组，将coors中的数组合并为一个数组
-        var coorsArr = [];
-        for (var i = 0; i < coors.length; i++) {
-          coorsArr = coorsArr.concat(coors[i]);
-        }
-        //将解压后的坐标放入点串数组pl中
-        for (var i = 0; i < coorsArr.length; i += 2) {
-          pl.push({
-            latitude: coorsArr[i],
-            longitude: coorsArr[i + 1]
-          })
-        }
-        //设置polyline属性，将路线显示出来,将解压坐标第一个数据作为起点
-        that.setData({
-          latitude: pl[0].latitude,
-          longitude: pl[0].longitude,
-          polyline: [{
-            points: pl,
-            color: '#FF0000DD',
-            width: 4
-          }]
-        })
-      },
-      fail: function(error) {
-        console.error(error);
-      },
-      complete: function(res) {
-        console.log(res);
-      }
+    var start = this.data.start
+    var end = this.data.end
+    var startData = JSON.stringify(start);
+    var endData = JSON.stringify(end);
+    wx.navigateTo({
+      url: '../lineResult/lineResult?start=' + startData + '&end=' + endData,
     })
   }
 })

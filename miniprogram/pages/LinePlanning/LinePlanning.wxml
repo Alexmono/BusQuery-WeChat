@@ -1,61 +1,57 @@
 <view>
   <!-- title -->
-  <view class="city">
+  <view class="city" bindtap="loseblur">
     <view class="city-view">
       <image class="city_image" src="https://s2.ax1x.com/2019/10/14/KpNy1U.png" mode="aspectFit"></image>
       <text class="city_text">当前城市：</text>
-      <navigator bindtap="changePage" class="city_name">{{city.cityName}}</navigator>
+      <navigator bindtap="changePage" class="city_name">{{city.name}}</navigator>
     </view>
   </view>
   <!-- 起点，终点输入 -->
   <view class="ste-body">
     <view class="ste-body-view">
       <!-- 标题 -->
-      <view class="ste-title">
+      <view class="ste-title" bindtap="loseblur">
         <text class="ste-title-text">线路规划</text>
       </view>
       <!-- 起点 -->
       <view class="ste-start">
-        <view class="ste-start-text-position">
+        <view class="ste-start-text-position" bindtap="loseblur">
           <text class="ste-start-text">起点</text>
           <button class="ste-start-position" bindtap="position">获取定位</button>
         </view>
-        <input class="ste-start-input" bindinput="getStart" bindblur="startLoseFoucs" value="{{start.value}}"></input>
-        <!-- 输入提示 -->
-        <scroll-view hidden="{{!isShowSSuggestion}}">
-          <view class="start-suggestion suggestion" wx:for="{{startSuggestion}}" wx:key="{{index}}">
-            <view bindtap="suggestionStartAddr" id="{{index}}">{{item.title}}</view>
-            <view>{{item.addr}}</view>
+        <input class="ste-start-input" bindinput="getStart" value="{{start.value}}"></input>
+
+        <!-- 起点输入提示 -->
+        <scroll-view scroll-y='true' class="suggestion sug-start" wx:if="{{isShowSSuggestion}}" bindscroll='getSscroll'>
+          <view wx:for="{{startSuggestion}}" wx:key="{{index}}" bindtap="suggestionStartAddr" data-sitem="{{item}}">
+            <view class="sug-ti">{{item.title}}</view>
+            <view class="sug-ad">{{item.address}}</view>
           </view>
         </scroll-view>
       </view>
       <!-- 起点终点交换 -->
-      <view class="ste-exchange">
+      <view class="ste-exchange" bindtap="loseblur">
         <button class="ste-exchange-button" bindtap="exChange">
           <image class="ste-exchange-icon" src="https://s2.ax1x.com/2019/10/15/KCII8x.png" mode="aspectFit"></image>
         </button>
       </view>
       <!-- 终点 -->
       <view class="ste-end">
-        <text class="ste-end-text">终点</text>
-        <input class="ste-end-input" bindinput="getEnd" bindblur="endLoseFoucs" value="{{end.value}}"></input>
-        <!-- 输入提示 -->
-        <scroll-view hidden="{{!isShowESuggestion}}">
-          <view class="end-suggestion suggestion" wx:for="{{endSuggestion}}" wx:key="{{index}}">
-            <view bindtap="suggestionEndAddr" id="{{index}}">{{item.title}}</view>
-            <view>{{item.addr}}</view>
+        <text class="ste-end-text" bindtap="loseblur">终点</text>
+        <input class="ste-end-input" bindinput="getEnd" value="{{end.value}}"></input>
+        <!-- 终点输入提示 -->
+        <scroll-view scroll-y='true' class="suggestion sug-end" wx:if="{{isShowESuggestion}}" bindscroll='getEscroll'>
+          <view wx:for="{{endSuggestion}}" wx:key="{{index}}" bindtap="suggestionEndAddr" data-eitem="{{item}}">
+            <view class="sug-ti">{{item.title}}</view>
+            <view class="sug-ad">{{item.address}}</view>
           </view>
         </scroll-view>
         <!-- 确认按钮 -->
-        <view class="ste-sure">
+        <view class="ste-sure" bindtap="loseblur">
           <button class="ste-sure-button" bindtap="planLine">开始规划</button>
         </view>
       </view>
-    </view>
-
-    <!-- 广告 -->
-    <view>
-
     </view>
   </view>
 </view>

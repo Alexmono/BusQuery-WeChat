@@ -14,7 +14,7 @@
   <view class="thisCity">当前选择城市</view>
   <view class="position-title-button">
     <view class="thisCityName">
-      <text class="thisCityName-text">{{choosecity.cityName}}</text>
+      <text class="thisCityName-text">{{choosecity.name}}</text>
     </view>
     <view class="position-onclick-button-view">
       <button class="position-onclick-button" bindtap="positioningLocation">点击定位</button>
@@ -32,15 +32,16 @@
     <text class="hotcity hotcity-common">热门城市</text>
     <view class="weui-grids">
       <block wx:for-items="{{popularCityList}}" wx:key="{{index}}">
-        <view class="weui-grid" data-cityCode="{{item.cid}}" data-city="{{item.name}}" bindtap="bindHotCity" >
+        <view class="weui-grid" data-cityid="{{item.cityid}}" data-name="{{item.name}}" data-code="{{item.code}}" bindtap="bindHotCity" >
           <view class="weui-grid__label">{{item.name}}</view>
         </view>
       </block>
     </view>
   </view>
+  <!-- 城市列表 -->
   <view class="selection" wx:for="{{cityList}}" wx:key="{{item.initial}}">
     <view class="item_letter"  id="{{item.initial}}">{{item.initial}}</view>
-    <view class="item_city"  wx:for="{{item.cityInfo}}" wx:for-item="city" wx:key="{{city.cid}}" data-cityCode="{{city.cid}}" data-city="{{city.name}}" bindtap="bindCity">
+    <view class="item_city"  wx:for="{{item.cityInfo}}" wx:for-item="city" wx:key="{{city.cityid}}" data-cityid="{{city.cityid}}" data-name="{{city.name}}" data-code="{{item.code}}" bindtap="bindCity">
       {{city.name}}
     </view>
   </view>

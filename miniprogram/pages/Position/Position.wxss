@@ -71,6 +71,9 @@
   font-size: 24rpx;
   color: #666;
 }
+.item_city:active{
+  color: #09bb07;
+}
 
 .hotcity-common {
   font-size: 24rpx;
@@ -101,6 +104,9 @@
   border: 1rpx solid rgb(210, 210, 210);
   border-radius: 8rpx;
   margin: 10rpx 12rpx;
+}
+.weui-grid:active{
+  border: 2rpx #09bb07 solid;
 }
 
 .weui-grid__label {

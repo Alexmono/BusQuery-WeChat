@@ -1,0 +1,89 @@
+<view class="body">
+	<!-- 站点 -->
+	<view wx:if="{{status == 'station'}}" class="title">
+		<view class="station-content">
+			<view class="station-name">
+				<text class="title-text">{{value}} [地铁站]</text>
+			</view>
+			<scroll-view scroll-y class="XL">
+				<view class="sta-line" style="height:100rpx" wx:for="{{stationInformation}}" wx:key="{{index}}" data-line="{{item}}" bindtap="tapLine">
+					<view class="sta-line-name">
+						<text class="sta-line-name-text">{{item.transitno}}</text>
+					</view>
+					<view class="sta-line-conten">
+						<view class="sta-line-sts">
+							<text class="sta-line-sts-text">{{item.startstation}} </text>
+							<text style="font-size: 26rpx;color:#595959">至</text>
+							<text class="sta-line-sts-text"> {{item.endstation}}</text>
+						</view>
+						<view class="sta-line-ttt">
+							<text class="sta-line-ttt-text">{{item.starttime}} </text>
+							<text style="font-size: 26rpx;color:#595959">--</text>
+							<text class="sta-line-ttt-text"> {{item.endtime}}</text>
+						</view>
+					</view>
+				</view>
+			</scroll-view>
+		</view>
+	</view>
+	<!-- 线路 -->
+	<view wx:if="{{status == 'line'}}" class="lines">
+		<view class="title">
+			<text class="title-text">{{value}} 查询结果</text>
+		</view>
+		<view>
+			<scroll-view scroll-y>
+				<view wx:for="{{lineInformation}}" wx:key="{{index}}" class="line sta-line" data-index="{{index}}" bindtap="display">
+					<view>
+						<view class="line-name">
+							<text class="line-name-text sta-line-name-text">{{item.transitno}}</text>
+						</view>
+						<view class="line-information">
+							<view class="information-where-time">
+								<view class="line-height">
+									<text class="line-information-se-font">{{item.startstation}}</text>
+									<text class="line-information-font"> 至 </text>
+									<text class="line-information-se-font">{{item.endstation}}</text>
+								</view>
+								<view class="line-height"><text class="line-information-font">{{item.timetable}}</text></view>
+								<view class="line-height"><text class="line-information-font">{{item.buscompany}}</text></view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</scroll-view>
+		</view>
+	</view>
+</view>
+<!-- 显示线路后的阴影 -->
+<view class="background" bindtap="closeDisplayPage" hidden="{{!displayPage}}"></view>
+<!-- 线路显示窗口 -->
+<view class="showPage" hidden="{{!displayPage}}">
+	<view class="line-title">
+		<view><text class="sta-line-name-text ">{{showLine.transitno}}</text></view>
+		<view class="line-height">
+			<text class="line-information-se-font">{{showLine.startstation}}</text>
+			<text class="line-information-font"> 至 </text>
+			<text class="line-information-se-font">{{showLine.endstation}}</text>
+		</view>
+		<view class="line-height"><text class="line-information-font">{{showLine.timetable}}</text></view>
+		<view class="line-height"><text class="line-information-font">{{showLine.buscompany}}</text></view>
+	</view>
+	<scroll-view scroll-y class="line-stationList">
+		<view wx:for="{{showLine.list}}" wx:key="{{index}}" data-cs="{{item.station}}" bindtap="chooseStation">
+			<view class="line-stations">
+				<view><text class="transfer-title-text">{{item.station}}</text></view>
+				<view wx:if="{{item.subway !== null}}" class="line-height">
+					<text class="transfer-content-text">当前站点可换乘</text>
+					<text class="transfer-content-text" wx:for="{{item.subway}}" style="color:{{item.color}}"> {{item.name}}</text>
+				</view>
+				<view wx:else class="line-height">
+					<text class="transfer-content-text">当前站点无换乘地铁线路</text>
+				</view>
+			</view>
+			<view wx:if="{{index !== showLine.list.length-1}}">
+				<cover-image src="../../icon//other/down.png" class="down-icon"></cover-image>
+			</view>
+		</view>
+	</scroll-view>
+</view>

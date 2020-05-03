@@ -1,10 +1,10 @@
-<view>
+<view class="body">
   <!-- Title -->
-  <view class="city">
+  <view class="city" bindtap="setloseBlur">
     <view class="city-view">
       <image class="city_image" src="https://s2.ax1x.com/2019/10/14/KpNy1U.png" mode="aspectFit"></image>
       <text class="city_text">当前城市：</text>
-      <navigator bindtap="changePage" class="city_name">{{city.cityName}}</navigator>
+      <text bindtap="changePage" class="city_name">{{city.name}}</text>
     </view>
   </view>
   <!-- 搜索 -->
@@ -12,8 +12,8 @@
     <view class="search-view">
       <!-- 搜索框 -->
       <view class="search-view-input-view">
-        <input class="search-view-input" type="text" placeholder="{{placeholder}}" value="{{inputContent}}" bindinput="getSuggerstion" bindblur="setValue"></input>
-      </view>  
+        <input class="search-view-input" type="text" placeholder="{{placeholder}}" value="{{inputContent}}" bindinput="getSuggerstion" bindblur="setloseBlur"></input>
+      </view>
       <!-- 搜索按钮 -->
       <view class="search-view-navigator-view">
         <button class="search-view-navigator" bindtap="search">
@@ -23,37 +23,67 @@
     </view>
   </view>
   <!-- 输入提示 -->
-      <scroll-view hidden="{{!isShowBusSuggestion}}">
-        <view class="busSuggestion" wx:for="{{busSuggestion}}" wx:key="index">
-          <view bindtap="suggestionAddr" id="{{index}}" data-id="{{item.id}}">{{item.title}}</view>
-          <view>{{item.addr}}</view>
-        </view>
-      </scroll-view>
-  <!-- 搜索结果 -->
-  <view hidden="{{!isShowBus}}">
-    <view>
-      <scroll-view hidden="{{isShowBusORStation !== 1}}">
-        <view>
-          <view>{{stationList.transitno}}</view>
-          <view>{{stationList.timetable}}</view>
-          <view wx:for="{{stationList.list}}" wx:key='index' data-stationId="{{index}}">
-            <button class="busStation-{{type}}"></button>
-            <view>{{item.station}}</view>
-          </view>
-        </view>
-      </scroll-view>
-      <scroll-view hidden="{{isShowBusORStation !== 2}}">
-        <view wx:for="{{busList}}" wx:key="index">
-          <view>{{item.transitno}}</view>
-          <view>票价：{{item.price}}</view>
-          <view>发车时间：{{item.starttime}}</view>
-          <view>收车时间：{{item.endtime}}</view>
-        </view>
-      </scroll-view>
+  <scroll-view hidden="{{!isShowBusSuggestion}}" class="suggestion" scroll-y='true' bindscroll='getscroll'>
+    <view class="busSuggestion" wx:for="{{busSuggestion}}" wx:key="{{index}}" bindtap="suggestionAddr" data-item="{{item}}">
+      <view class="busSuggestion-su">{{item.title}}</view>
+      <view class="busSuggestion-ad">{{item.address}}</view>
+    </view>
+  </scroll-view>
+  <!-- 站点信息OR线路信息 -->
+  <view class="lineAndstation" hidden="{{!isShowBus}}" bindtap="setloseBlur">
+    <view hidden="{{isShowBusORStation !== 1}}">
+      <view class="information-line-name">{{stationList.transitno}}</view>
+      <view class="information-line-time">{{stationList.timetable}}</view>
+      <view class="information-line-price">参考票价：{{stationList.price}}.00</view>
+    </view>
+    <view hidden="{{isShowBusORStation !== 2}}">
+      <view class="information-station-name">{{item.title}}</view>
+      <view class="information-station-location">{{item.province}} {{item.city}} {{item.district}}</view>
     </view>
   </view>
-  <!-- 广告 -->
-  <view>
-    <view></view>
+  <!-- 搜索结果 -->
+  <view class="buslist" style=" min-height:{{minHight}}rpx" bindtap="setloseBlur">
+    <view hidden="{{isShowBus}}">
+      <!-- 此处添加内容装饰界面 -->
+    </view>
+    <view hidden="{{!isShowBus}}">
+      <view>
+        <scroll-view hidden="{{isShowBusORStation !== 1}}">
+          <view class="line-stationlist">
+            <view wx:for="{{stationList.list}}" wx:key='{{index}}' data-stationitem="{{item}}" bindtap="searchstationItem">
+              <view class="stationlist">
+                <view class="circle">
+                  <!-- 圆 -->
+                  <view class="out" style="border-color:{{item.subway[0].color}}">
+                    <view class="in" style="background-color:{{item.subway[0].color}}">
+                    </view>
+                  </view>
+                  <!-- 站名 -->
+                  <view class="station-name">{{item.station}}</view>
+                  <view wx:if="{{item.subway[0].name !== null}}" class="line-station-subway">
+                    <view wx:for='{{item.subway}}' wx:key='{{index}}' class="line-station-subway-name" style="color:{{item.color}}">{{item.name}}</view>
+                  </view>
+                </view>
+                <!-- 竖线 -->
+                <view class="line" wx:if='{{stationList.lastStation !== index}}'></view>
+              </view>
+            </view>
+          </view>
+        </scroll-view>
+        <!-- 站点信息 -->
+        <scroll-view class="busstationlinelist" hidden="{{isShowBusORStation !== 2}}">
+          <view class="buslinelist-box" wx:for="{{busList}}" wx:key="index" data-lineitem="{{item}}" bindtap="searchlineItem">
+            <view class="buslinelist-information">
+              <view class="buslinelist-information-name">{{item.transitno}}</view>
+            </view>
+            <view class="buslinelist-information-se">
+              <view class="buslinelist-information-se-s">{{item.startstation}}</view>
+              <view class="buslinelist-information-se-w">往</view>
+              <view class="buslinelist-information-se-e">{{item.endstation}}</view>
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+    </view>
   </view>
 </view>

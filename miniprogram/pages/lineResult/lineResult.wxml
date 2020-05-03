@@ -1,0 +1,125 @@
+<view>
+  <view>
+    <!--地图容器-->
+    <map id="myMap" style="width: 100%; height: 500rpx;" longitude="{{linesPoint[pageid].longitude}}" latitude="{{linesPoint[pageid].latitude}}" scale='16' polyline="{{linesPoint[pageid].polyline}}" show-location>
+    </map>
+  </view>
+  <view class="content">
+    <!-- nav -->
+    <view class="nav">
+      <view class="nav-content">
+        <view class="swiper-previous previous-next" bindtap="previous">
+          <image class="previous-next-image" src="https://s2.ax1x.com/2019/12/04/Q12qHO.png" mode="aspectFit"></image>
+        </view>
+        <swiper current="{{pageid}}" class="swiper">
+          <block wx:for="{{linesPoint}}" wx:key="{{index}}">
+            <swiper-item catchtouchmove='catchTouchMove'>
+              <view class="title">方案{{index + 1}}</view>
+            </swiper-item>
+          </block>
+        </swiper>
+        <view class="swiper-next previous-next" bindtap="next">
+          <image class="previous-next-image" src="https://s2.ax1x.com/2019/12/04/Q1Rpvt.png" mode="aspectFit"></image>
+        </view>
+      </view>
+    </view>
+    <!-- 流程 -->
+    <view class="cent">
+      <view class="lines">
+        <scroll-view scroll-y="true">
+          <view wx:for="{{linesLine[pageid]}}" wx:for-item="process" wx:for-index="idx" wx:key="{{index}}">
+            <!-- 步行 -->
+            <view wx:if="{{process.mode == 'WALKING'}}">
+              <view class="figure-head" wx:if="{{idx == 0}}">
+                <!-- 园 -->
+                <view class="circle">
+                  <view class="out out-walk">
+                    <view class="in in-walk"></view>
+                  </view>
+                </view>
+                <!-- 站点 -->
+                <view class="station-text">当前起点</view>
+              </view>
+              <view class="figure-foot">
+                <!-- 线 -->
+                <view class="line line-walk"></view>
+                <!-- 做什么 -->
+                <text class="do-text">步行{{process.distance}}米\n大概需要{{process.duration}}分钟</text>
+              </view>
+              <view class="figure-head" wx:if="{{idx == linesLine[pageid].length-1}}">
+                <!-- 园 -->
+                <view class="circle">
+                  <view class="out out-walk">
+                    <view class="in in-walk"></view>
+                  </view>
+                </view>
+                <!-- 站点 -->
+                <view class="station-text">到达终点</view>
+              </view>
+            </view>
+            <view wx:else>
+              <!-- 公交 -->
+              <view wx:if="{{process.lines[0].vehicle == 'BUS'}}">
+                <view class="figure-head">
+                  <!-- 园 -->
+                  <view class="circle">
+                    <view class="out out-bus">
+                      <view class="in in-bus"></view>
+                    </view>
+                  </view>
+                  <!-- 站点 -->
+                  <view class="station-text station-text-bus">{{process.lines[0].geton.title}} 公交站</view>
+                </view>
+                <view class="figure-foot">
+                  <!-- 线 -->
+                  <view class="line line-bus"></view>
+                  <!-- 做什么 -->
+                  <text class="do-text">乘坐{{process.lines[0].title}}路公交\n大概需要{{process.lines[0].duration}}分钟</text>
+                </view>
+                <view class="figure-head">
+                  <!-- 园 -->
+                  <view class="circle">
+                    <view class="out out-bus">
+                      <view class="in in-bus"></view>
+                    </view>
+                  </view>
+                  <!-- 站点 -->
+                  <view class="station-text station-text-bus">{{process.lines[0].getoff.title}} 公交站</view>
+                </view>
+              </view>
+              <!-- 地铁 -->
+              <view wx:else>
+                <view class="figure-head">
+                  <!-- 园 -->
+                  <view class="circle">
+                    <view class="out out-subway">
+                      <view class="in in-subway"></view>
+                    </view>
+                  </view>
+                  <!-- 站点 -->
+                  <view class="station-text station-text-subway">{{process.lines[0].geton.title}} 地铁站</view>
+                </view>
+                <view class="figure-foot">
+                  <!-- 线 -->
+                  <view class="line line-subway"></view>
+                  <!-- 做什么 -->
+                  <text class="do-text">乘坐{{process.lines[0].title}}\n大概需要{{process.lines[0].duration}}分钟</text>
+                </view>
+                <view class="figure-head">
+                  <!-- 园 -->
+                  <view class="circle">
+                    <view class="out out-subway">
+                      <view class="in in-subway"></view>
+                    </view>
+                  </view>
+                  <!-- 站点 -->
+                  <view class="station-text station-text-subway">{{process.lines[0].getoff.title}} 地铁站</view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+    </view>
+  </view>
+</view>

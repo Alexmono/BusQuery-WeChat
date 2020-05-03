@@ -1,0 +1,61 @@
+<!--miniprogram/pages/busLineResult/busLineResult.wxml-->
+<view class="body">
+  <!-- Title -->
+  <view class="city">
+    <view class="city-view">
+      <image class="city_image" src="https://s2.ax1x.com/2019/10/14/KpNy1U.png" mode="aspectFit"></image>
+      <text class="city_text">当前城市：</text>
+      <text class="city_name">{{city.name}}</text>
+    </view>
+  </view>
+  <view class="title">
+    <view class="line-title" wx:if="{{type == 1}}">
+      <view class="line-title-transitno">{{item.transitno}}</view>
+      <view class="line-title-time">{{item.starttime}}-{{item.endtime}}</view>
+      <view class="line-title-price">参考票价：{{item.price}}.00</view>
+    </view>
+    <view class="station-title" wx:if="{{type == 2}}">
+      <view class="station-title-station">{{item.station}}</view>
+    </view>
+  </view>
+  <!-- 线路展示 -->
+  <view wx:if='{{type == 1}}' class="display">
+    <scroll-view>
+      <view class="line-stationlist">
+        <view wx:for="{{stationlist.list}}" wx:key='{{index}}'>
+          <view class="stationlist">
+            <view class="circle">
+              <!-- 圆 -->
+              <view class="out" style="border-color:{{item.subway[0].color}}">
+                <view class="in" style="background-color:{{item.subway[0].color}}">
+                </view>
+              </view>
+              <!-- 站名 -->
+              <view class="station-name">{{item.station}}</view>
+              <view wx:if="{{item.subway[0].name !== null}}" class="line-station-subway">
+                <view wx:for='{{item.subway}}' wx:key='{{index}}' class="line-station-subway-name" style="color:{{item.color}}">{{item.name}}</view>
+              </view>
+            </view>
+            <!-- 竖线 -->
+            <view class="line" wx:if='{{stationlist.lastStation !== index}}'></view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+  <!-- 站点展示 -->
+  <view wx:if='{{type == 2}}' class="display">
+    <scroll-view>
+      <view class="buslinelist-box" wx:for="{{linelist}}" wx:key="{{index}}">
+        <view class="buslinelist-information">
+          <view class="buslinelist-information-name">{{item.transitno}}</view>
+        </view>
+        <view class="buslinelist-information-se">
+          <view class="buslinelist-information-se-s">{{item.startstation}}</view>
+          <view class="buslinelist-information-se-w">往</view>
+          <view class="buslinelist-information-se-e">{{item.endstation}}</view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>

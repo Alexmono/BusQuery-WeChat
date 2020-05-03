@@ -1,0 +1,146 @@
+/* miniprogram/pages/lineResult/lineResult.wxss */
+
+.content {
+  border-top: 1rpx #dadada solid;
+  border-top-right-radius: 15rpx;
+  border-top-left-radius: 15rpx;
+  width: 100%;
+  background-color: white;
+  height: 50%;
+}
+
+/**** nav ****/
+
+.nav {
+  width: 100%;
+  height: 60rpx;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+  border-bottom: 15rpx #dadada solid;
+}
+
+.nav-content {
+  padding: 5rpx;
+  width: 340rpx;
+  height: 40rpx;
+  margin: 0 auto;
+}
+
+.previous-next {
+  float: left;
+  display: block;
+  width: 40rpx;
+  height: 40rpx;
+  padding: 4rpx;
+}
+
+.swiper-previous {
+  margin-left: 0rpx;
+}
+
+.swiper-next {
+  margin-left: 40rpx;
+}
+
+.previous-next-image {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+.swiper {
+  margin-left: 40rpx;
+  float: left;
+  display: block;
+  width: 170rpx;
+}
+
+.title {
+  text-align: center;
+  height: 40rpx;
+  font-size: 35rpx;
+}
+
+/* 流程css */
+.cent{
+  width: 100%;
+  height: 57%;
+}
+.lines{
+  width: 70%;
+  margin-left: 15%;
+}
+.figure-head{
+  display: flex;
+}
+.circle{
+  float: left
+}
+.out{
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+}
+.in{
+  margin-left: 5rpx;
+  margin-top: 5rpx;
+  width: 30rpx;
+  height: 30rpx;
+  border-radius: 50%;
+}
+.out-walk{
+  border: gray 2rpx solid;
+}
+.in-walk{
+  background-color: gray;
+}
+.out-bus{
+  border: greenyellow 2rpx solid;
+}
+.in-bus{
+  background-color: greenyellow;
+}
+.out-subway{
+  border: skyblue 2rpx solid;
+}
+.in-subway{
+  background-color: skyblue;
+}
+.figure-foot{
+  display: flex;
+}
+.line{
+  width: 14rpx;
+  float: left;
+  margin-left: 16rpx;
+  height: 150rpx;
+}
+.line-walk{
+  background-color: gray;
+}
+.line-bus{
+  background-color: greenyellow;
+}
+.line-subway{
+  background-color: skyblue;
+}
+.station-text{
+  float: left;
+  margin-left: 10%;
+  font-size: 35rpx;
+}
+.station-text-defult{
+  color: gray;
+}
+.station-text-bus{
+  color: greenyellow;
+}
+.station-text-subway{
+  color: skyblue;
+}
+.do-text{
+  float: left;
+  margin-top: 40rpx;
+  margin-left: 10%;
+  font-size: 30rpx;
+  color: gray
+}

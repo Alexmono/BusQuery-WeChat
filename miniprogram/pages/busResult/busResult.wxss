@@ -1,0 +1,181 @@
+/* miniprogram/pages/busLineResult/busLineResult.wxss */
+
+.body {
+  margin: 0;
+  padding: 0;
+}
+
+.display {
+  background-color: #dadada;
+}
+
+/* 城市名 */
+
+.city {
+  display: flex;
+  padding-left: 40rpx;
+}
+
+.city-view {
+  display: flex;
+  flex: 2;
+}
+
+.city_image {
+  width: 32rpx;
+  height: 32rpx;
+  margin-top: 11rpx;
+}
+
+.city_text {
+  font-size: 35rpx;
+}
+
+.city_name {
+  font-size: 35rpx;
+  color: #576b95;
+}
+
+/* title */
+
+.title {
+  padding: 20rpx;
+}
+
+.line-title {
+  margin-left: 40rpx;
+  padding: 10rpx;
+}
+
+.line-title-transitno {
+  font-size: 35rpx;
+}
+
+.line-title-time {
+  font-size: 30rpx;
+  color: #6f6f6f;
+}
+
+.line-title-price {
+  font-size: 30rpx;
+  color: #6f6f6f;
+}
+
+.station-title {
+  margin-left: 40rpx;
+  padding: 10rpx;
+}
+
+.station-title-station {
+  font-size: 35rpx;
+}
+
+/*** 公交线路展示样式 ***/
+
+.line-stationlist {
+  margin-top: 30rpx;
+  margin-left: 60rpx;
+}
+
+.stationlist {
+  width: 500rpx;
+  height: 120rpx;
+}
+
+.circle {
+  width: 500rpx;
+  height: 40rpx;
+}
+
+/* 站名 */
+
+.station-name {
+  width: 370rpx;
+  height: 30rpx;
+  margin-left: 90rpx;
+  margin-top: -65rpx;
+}
+
+/* 圆 */
+
+.out {
+  display: inline-block;
+  background-color: #dadada;
+  width: 40rpx;
+  height: 40rpx;
+  border: 6rpx #0095ff solid;
+  border-radius: 50%;
+  padding-left: 10rpx;
+  padding-top: 10rpx;
+}
+
+.in {
+  background-color: #0095ff;
+  width: 32rpx;
+  height: 32rpx;
+  border-radius: 50%;
+}
+
+/* 线 */
+
+.line {
+  width: 12rpx;
+  height: 80rpx;
+  background-color: #0095ff;
+  margin-left: 24rpx;
+}
+
+.line-station-subway {
+  margin-left: 80rpx;
+  margin-top: 10rpx;
+}
+
+.line-station-subway-name {
+  display: inline-block;
+  font-size: 30rpx;
+  margin-left: 10rpx;
+}
+
+/*** 公交站点展示样式 ***/
+
+.buslinelist-box {
+  width: 80%;
+  height: 90rpx;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  box-shadow: 10rpx 10rpx 15rpx -10rpx;
+  /* border: white 1rpx solid; */
+  border-radius: 15rpx;
+  margin: 0 auto;
+  padding: 10rpx;
+  margin-top: 30rpx;
+  margin-bottom: 30rpx;
+  margin-left: 40rpx;
+}
+
+.buslinelist-information-name {
+  color: #09bb07;
+  font-size: 35rpx;
+}
+
+.buslinelist-information-se {
+  font-size: 30rpx;
+}
+
+.buslinelist-information-se-s {
+  display: inline-block;
+  color: #6f6f6f;
+}
+
+.buslinelist-information-se-w {
+  display: inline-block;
+  color: #09bb07;
+  margin-left: 15rpx;
+}
+
+.buslinelist-information-se-e {
+  display: inline-block;
+  color: #6f6f6f;
+  margin-left: 15rpx;
+}
